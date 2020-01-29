@@ -1,22 +1,77 @@
-var startButton = document.getElementById('beginQuiz')
-var nextButton = document.getElementById('nextBtn')
-var quizBoxEl = document.getElementById('quizBox')
-var questionElement = document.getElementById('question')
-var choiceEl = document.getElementById('answerChoices')
+var startButton = document.getElementById("beginQuiz")
+var nextButton = document.getElementById("nextBtn")
+var quizBoxEl = document.getElementById("quizBox")
+var questionElement = document.getElementById("question")
+var choiceEl = document.getElementById("answerChoices")
 
 var shuffledQuestions, currentQuestionIndex
 
-// click listeners for start and next buttons
+var questions = [
+
+    {
+        question: "Who is the main character in Game of Thrones show?",
+        answers: [
+            { text: " Jaime ", correct: false },
+            { text: " Cersei ", correct: false },
+            { text: " Daenerys ", correct: true },
+            { text: " Sansa ", correct: false }
+        ]
+
+    },
+
+    {
+        question: "What do you think, when you see red, green, blue?",
+        answers: [
+            { text: " html ", correct: false },
+            { text: " JS ", correct: false },
+            { text: " CSS ", correct: true },
+            { text: " Or all ", correct: false },
+        ],
+    },
+
+    {
+        question: "How many cylinders are allow on Formula 1 cars since 2014 ?",
+        answers: [
+            { text: " V6 ", correct: true },
+            { text: " V8 ", correct: false },
+            { text: " V10 ", correct: false },
+            { text: " V12 ", correct: false }
+        ],
+    },
+
+    {
+        question: "Scariest movie ever?",
+        answers: [
+            { text: " The Ring ", correct: true },
+            { text: " The Exorcist ", correct: true },
+            { text: " 28 Days Later ", correct: true },
+            { text: " The Devil Dead ", correct: true }
+        ],
+    },
+
+    {
+        question: "In what state can you eat the best pizza?",
+        answers: [
+            { text: " Connecticut ", correct: true },
+            { text: " New York ", correct: false },
+            { text: " Illinois ", correct: false },
+            { text: " Massachusetts ", correct: false }
+        ],
+    },
+]
+
+// Event listener to start game and next button
 startButton.addEventListener('click', startQuiz)
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     nextQuestion()
 })
 
-// function that starts the quiz by hiding the start button and un-hides the list of questions/answers
-// also shuffles the possible questions on each start
-function startQuiz() {
+// function that starts the quiz and hide start button.
+    function startQuiz() {
     startButton.classList.add('hide')
+   
+    // Random question when start.
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     quizBoxEl.classList.remove('hide')
@@ -62,56 +117,3 @@ function selectAnswer() {
     }
 }
 
-var questions = [
-
-    {
-        question: "Inside of which HTML element do we put the JavaScript?",
-        answers: [
-            { text: " div ", correct: false },
-            { text: " body ", correct: false },
-            { text: " script ", correct: true },
-            { text: " link ", correct: false }
-        ]
-
-    },
-
-    {
-        question: "How do we link an external JavaScript?",
-        answers: [
-            { text: " script href=' ' ", correct: false },
-            { text: " script link=' ' ", correct: false },
-            { text: " script name=' ' ", correct: false },
-            { text: " script src=' ' ", correct: true },
-        ],
-    },
-
-    {
-        question: "How do you create a function in JavaScript?",
-        answers: [
-            { text: " function myFunction() ", correct: true },
-            { text: " function: myFunction() ", correct: false },
-            { text: " function = myFunction() ", correct: false },
-            { text: " fucntion.myFunction() ", correct: false }
-        ],
-    },
-
-    {
-        question: "How would you call a function named myFunction?",
-        answers: [
-            { text: " call myFunction() ", correct: false },
-            { text: " call.function myFunction() ", correct: false },
-            { text: " call(myFucntion) ", correct: false },
-            { text: " myFunction() ", correct: true }
-        ],
-    },
-
-    {
-        question: "What even occurs when we click an element on page?",
-        answers: [
-            { text: " Keyup ", correct: false },
-            { text: " Click ", correct: true },
-            { text: " Change ", correct: false },
-            { text: " Keydown ", correct: false }
-        ],
-    },
-]
