@@ -1,0 +1,31 @@
+body {
+    font-family: 'Indie Flower', cursive;
+    font-size: 20px;
+    background-color: gray;
+}
+
+.hide {
+    display: none;
+}
+
+.card {
+    width: 960px;
+    margin-top: 250px;
+    padding: 10px 30px 10px 30px;
+    background-color: rgb(235, 235, 15);
+    
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+}
+
+.btn {
+    margin: 5px;
+    background-color: #5c8899;
+    border-color:#333;
+    font-family: 'Indie Flower', cursive;
+    font-weight: bolder;
+    font-size: 20px;
+}
