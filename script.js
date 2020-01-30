@@ -1,3 +1,4 @@
+// linked HTML iDs to make reference
 var startButton = document.getElementById("beginQuiz")
 var nextButton = document.getElementById("nextBtn")
 var quizBoxEl = document.getElementById("quizBox")
@@ -6,6 +7,7 @@ var choiceEl = document.getElementById("answerChoices")
 
 var shuffledQuestions, currentQuestionIndex
 
+// Array of all questions with answers.
 var questions = [
 
     {
@@ -60,25 +62,25 @@ var questions = [
     },
 ]
 
-// Event listener to start game and next button
-startButton.addEventListener('click', startQuiz)
-nextButton.addEventListener('click', () => {
+// Event listener to start button when click on.
+startButton.addEventListener("click", startQuiz)
+nextButton.addEventListener("click", () => {
     currentQuestionIndex++
     nextQuestion()
 })
 
 // function that starts the quiz and hide start button.
     function startQuiz() {
-    startButton.classList.add('hide')
+    startButton.classList.add("hide")
    
     // Random question when start.
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    shuffledQuestions = questions.sort(() => Math.random() - 1)
     currentQuestionIndex = 0
     quizBoxEl.classList.remove('hide')
     nextQuestion()
 }
 
-// selects the next question and invokes the reset function
+// selects the next question and then reset function
 function nextQuestion() {
     resetState()
     displayQuestions(shuffledQuestions[currentQuestionIndex])
