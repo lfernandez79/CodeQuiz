@@ -1,11 +1,13 @@
 // linked HTML iDs to make reference
-var startButton = document.getElementById("beginQuiz")
-var nextButton = document.getElementById("nextBtn")
-var quizBoxEl = document.getElementById("quizBox")
-var questionElement = document.getElementById("question")
-var choiceEl = document.getElementById("answerChoices")
+var startButton = document.getElementById("beginQuiz");
+var nextButton = document.getElementById("nextBtn");
+var quizBoxEl = document.getElementById("quizBox");
+var questionElement = document.getElementById("question");
+var choiceEl = document.getElementById("answerChoices");
+var timerEl = document.getElementById("timer");
+var secondsLeft = 30;
 
-var shuffledQuestions, currentQuestionIndex
+var shuffledQuestions, currentQuestionIndex;
 
 // Array of all questions with answers.
 var questions = [
@@ -62,66 +64,76 @@ var questions = [
     },
 ]
 
-var timer = 100;
-var intervalId = setInterval(funtion() {
-    if(timer>0)
-    timer--;
-})
+function setTimer() {
+    var timerInterval = setInterval(function(){
+        secondsLeft--;
+        timerEl.textContent = "Timer, hurry up! " + secondsLeft;
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            
+        }
+        
+    }, 1000); 
+}
+setTimer();
+console.log(secondsLeft);
+
+
 
 // Event listener to start button when click on.
-startButton.addEventListener("click", startQuiz)
+startButton.addEventListener("click", startQuiz);
 nextButton.addEventListener("click", () => {
-    currentQuestionIndex++
-    nextQuestion()
+    currentQuestionIndex++;
+    nextQuestion();
 })
 
 // function that starts the quiz and hide start button.
     function startQuiz() {
-    startButton.classList.add("hide")
+    startButton.classList.add("hide");
    
 // Random question selected when start.
-    shuffledQuestions = questions.sort(() => Math.random() - 1)
-    currentQuestionIndex = 0
-    quizBoxEl.classList.remove("hide")
-    nextQuestion()
+    shuffledQuestions = questions.sort(() => Math.random() - 1);
+    currentQuestionIndex = 0;
+    quizBoxEl.classList.remove("hide");
+    nextQuestion();
 }
 
 // selects the next question and then reset function
 function nextQuestion() {
-    resetState()
+    resetState();
     displayQuestions(shuffledQuestions[currentQuestionIndex])
 }
 
 // displays question on page and create a button for answers.
 function displayQuestions(question) {
-    questionElement.innerText = question.question
+    questionElement.innerText = question.question;
     question.answers.forEach(answer => {
-        var button = document.createElement("button")
-        button.innerText = answer.text
-        button.classList.add("btn")
+        var button = document.createElement("button");
+        button.innerText = answer.text;
+        button.classList.add("btn");
         if (answer.correct) {
-            button.dataset.correct = answer.correct
+            button.dataset.correct = answer.correct;
         }
-        button.addEventListener("click", selectAnswer)
-        choiceEl.appendChild(button)
-    })
+        button.addEventListener("click", selectAnswer);
+        choiceEl.appendChild(button);
+    });
 }
 
 // removes the previous questions answers by 'resetting' the page
 function resetState() {
-    nextButton.classList.add("hide")
+    nextButton.classList.add("hide");
     while (choiceEl.firstChild) {
-        choiceEl.removeChild(choiceEl.firstChild)
+        choiceEl.removeChild(choiceEl.firstChild);
     }
 }
 
 // continues to cycle through answers until none are left, switch startButton to Submit
 function selectAnswer() {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
-        nextButton.classList.remove("hide")
+        nextButton.classList.remove("hide");
     } else {
-        startButton.innerText = "Submit"
-        startButton.classList.remove("hide")
+        startButton.innerText = "Submit";
+        startButton.classList.remove("hide");
     }
 }
 
