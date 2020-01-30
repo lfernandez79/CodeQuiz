@@ -2,17 +2,21 @@ body {
     font-family: 'Indie Flower', cursive;
     font-size: 20px;
     background-color: gray;
+    margin: auto;
 }
 
 .hide {
     display: none;
 }
 
+
+
 .card {
     width: 960px;
-    margin-top: 250px;
+    margin-top: auto;
     padding: 10px 30px 10px 30px;
     background-color: rgb(235, 235, 15);
+    margin-left: 75px;
     
 }
 

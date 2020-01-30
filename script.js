@@ -62,6 +62,12 @@ var questions = [
     },
 ]
 
+var timer = 100;
+var intervalId = setInterval(funtion() {
+    if(timer>0)
+    timer--;
+})
+
 // Event listener to start button when click on.
 startButton.addEventListener("click", startQuiz)
 nextButton.addEventListener("click", () => {
@@ -73,10 +79,10 @@ nextButton.addEventListener("click", () => {
     function startQuiz() {
     startButton.classList.add("hide")
    
-    // Random question when start.
+// Random question selected when start.
     shuffledQuestions = questions.sort(() => Math.random() - 1)
     currentQuestionIndex = 0
-    quizBoxEl.classList.remove('hide')
+    quizBoxEl.classList.remove("hide")
     nextQuestion()
 }
 
@@ -86,24 +92,24 @@ function nextQuestion() {
     displayQuestions(shuffledQuestions[currentQuestionIndex])
 }
 
-// displays the question to the page, and for each possible answer creates a button
+// displays question on page and create a button for answers.
 function displayQuestions(question) {
     questionElement.innerText = question.question
     question.answers.forEach(answer => {
-        var button = document.createElement('button')
+        var button = document.createElement("button")
         button.innerText = answer.text
-        button.classList.add('btn')
+        button.classList.add("btn")
         if (answer.correct) {
             button.dataset.correct = answer.correct
         }
-        button.addEventListener('click', selectAnswer)
+        button.addEventListener("click", selectAnswer)
         choiceEl.appendChild(button)
     })
 }
 
 // removes the previous questions answers by 'resetting' the page
 function resetState() {
-    nextButton.classList.add('hide')
+    nextButton.classList.add("hide")
     while (choiceEl.firstChild) {
         choiceEl.removeChild(choiceEl.firstChild)
     }
@@ -112,10 +118,10 @@ function resetState() {
 // continues to cycle through answers until none are left, switch startButton to Submit
 function selectAnswer() {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
-        nextButton.classList.remove('hide')
+        nextButton.classList.remove("hide")
     } else {
-        startButton.innerText = 'Submit'
-        startButton.classList.remove('hide')
+        startButton.innerText = "Submit"
+        startButton.classList.remove("hide")
     }
 }
 
